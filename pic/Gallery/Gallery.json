@@ -1,0 +1,52 @@
+[
+  {
+    "src": "1.jpg",
+    "title": "STAAD Model – Steel Warehouse",
+    "category": "Model",
+    "description": "Structural analysis model in STAAD.Pro showing frame and member forces."
+  },
+  {
+    "src": "2.jpg",
+    "title": "Utilization Ratio Model",
+    "category": "Model",
+    "description": "Color‑coded utilization display highlighting overstressed members."
+  },
+  {
+    "src": "3.jpg",
+    "title": "Tekla 3D Model",
+    "category": "Model",
+    "description": "Full 3D steel structure model created in Tekla Structures."
+  },
+  {
+    "src": "4.jpg",
+    "title": "Connection Details – Tekla",
+    "category": "Detail",
+    "description": "3D view of typical steel connections with bolts and plates."
+  },
+  {
+    "src": "5.jpg",
+    "title": "Steel Column Detailing",
+    "category": "Detail",
+    "description": "Shop drawing view of a built‑up steel column with stiffeners."
+  },
+  {
+    "src": "6.jpg",
+    "title": "Roof Sheet Layout & Master Plan",
+    "category": "Layout",
+    "description": "Purlins, roof sheeting, and overall site master plan."
+  },
+  {
+    "src": "boq.pdf",
+    "title": "Bill of Quantities (BOQ)",
+    "category": "Document",
+    "type": "pdf",
+    "description": "Detailed BOQ with quantities and rates."
+  },
+  {
+    "src": "assembly-list.pdf",
+    "title": "Assembly List – Fabrication Items",
+    "category": "Document",
+    "type": "pdf",
+    "description": "Complete assembly list with profiles, weights, and quantities."
+  }
+]

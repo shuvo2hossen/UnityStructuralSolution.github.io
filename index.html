@@ -73,6 +73,7 @@
            24. STICKY CTA
            25. ANIMATIONS
            26. RESPONSIVE
+           27. GALLERY (NEW)
            ============================================================ */
 
         /* ===== 1. ROOT VARIABLES ===== */
@@ -2232,6 +2233,389 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
+        /* =============================================================
+           27. GALLERY
+           ============================================================ */
+        .gallery-section {
+            padding: 80px 0;
+            background: var(--bg);
+        }
+        [data-theme="dark"] .gallery-section {
+            background: var(--bg);
+        }
+        .gallery-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .gallery-filters button {
+            padding: 6px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: var(--light);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font);
+        }
+        .gallery-filters button:hover,
+        .gallery-filters button.active {
+            background: var(--secondary);
+            color: #fff;
+            border-color: var(--secondary);
+        }
+        .gallery-filters button .count {
+            display: inline-block;
+            background: rgba(30, 92, 166, 0.08);
+            font-size: 0.55rem;
+            padding: 0 6px;
+            border-radius: 10px;
+            margin-left: 4px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        .gallery-filters button.active .count {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--light);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+        .gallery-item .thumb {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gallery-item .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .thumb img {
+            transform: scale(1.04);
+        }
+        .gallery-item .thumb .pdf-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(220, 53, 69, 0.85);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .gallery-item .thumb .pdf-badge i {
+            font-size: 0.7rem;
+        }
+        .gallery-item .thumb .overlay-icon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: var(--transition);
+            font-size: 2.5rem;
+            color: #fff;
+            backdrop-filter: blur(2px);
+        }
+        .gallery-item:hover .thumb .overlay-icon {
+            opacity: 1;
+        }
+        .gallery-item .info {
+            padding: 16px 18px 18px;
+        }
+        .gallery-item .info .cat-tag {
+            display: inline-block;
+            background: rgba(30, 92, 166, 0.08);
+            color: var(--secondary);
+            padding: 1px 12px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .gallery-item .info h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+        .gallery-item .info p {
+            font-size: 0.78rem;
+            color: var(--gray);
+            margin: 2px 0 0;
+        }
+
+        /* Lightbox */
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            animation: fadeIn 0.3s ease;
+        }
+        .gallery-lightbox.active {
+            display: flex;
+        }
+        .gallery-lightbox .lb-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            background: var(--bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+            animation: slideUp 0.4s ease;
+        }
+        .gallery-lightbox .lb-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            display: block;
+            object-fit: contain;
+        }
+        .gallery-lightbox .lb-content .lb-pdf {
+            padding: 40px 32px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-lightbox .lb-content .lb-pdf i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .gallery-lightbox .lb-content .lb-pdf h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .gallery-lightbox .lb-content .lb-pdf p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .gallery-lightbox .lb-content .lb-pdf .btn {
+            align-self: center;
+        }
+        .gallery-lightbox .lb-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            color: #fff;
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-lightbox .lb-close:hover {
+            background: rgba(0, 0, 0, 0.6);
+            transform: rotate(90deg);
+        }
+        .gallery-lightbox .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-lightbox .lb-nav:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .gallery-lightbox .lb-nav.prev {
+            left: 12px;
+        }
+        .gallery-lightbox .lb-nav.next {
+            right: 12px;
+        }
+        .gallery-lightbox .lb-counter {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+
+        .gallery-empty {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+        .gallery-empty i {
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.2;
+            margin-bottom: 12px;
+        }
+        .gallery-empty h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .gallery-empty p {
+            font-size: 0.9rem;
+        }
+        .gallery-empty .code-block {
+            background: var(--light);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            font-size: 0.75rem;
+            text-align: left;
+            max-width: 500px;
+            margin: 12px auto 0;
+            overflow-x: auto;
+            color: var(--dark);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .gallery-loading {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+        .gallery-loading .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--light);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Gallery responsive tweaks */
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+            .gallery-item .info {
+                padding: 12px 14px 14px;
+            }
+            .gallery-item .info h4 {
+                font-size: 0.8rem;
+            }
+            .gallery-item .info p {
+                font-size: 0.7rem;
+            }
+            .gallery-filters button {
+                font-size: 0.7rem;
+                padding: 4px 14px;
+            }
+            .gallery-lightbox .lb-content {
+                max-width: 98vw;
+                max-height: 92vh;
+            }
+            .gallery-lightbox .lb-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .gallery-lightbox .lb-nav.prev {
+                left: 4px;
+            }
+            .gallery-lightbox .lb-nav.next {
+                right: 4px;
+            }
+        }
+        @media (max-width: 420px) {
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .gallery-item .info {
+                padding: 8px 10px 10px;
+            }
+            .gallery-item .info h4 {
+                font-size: 0.7rem;
+            }
+            .gallery-item .info p {
+                font-size: 0.6rem;
+            }
+            .gallery-item .info .cat-tag {
+                font-size: 0.5rem;
+                padding: 0 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2250,6 +2634,7 @@
                 <li role="none"><a href="#services" role="menuitem">Services</a></li>
                 <li role="none"><a href="#portfolio" role="menuitem">Portfolio</a></li>
                 <li role="none"><a href="#casestudies" role="menuitem">Case Studies</a></li>
+                <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
                 <li role="none"><a href="#training" role="menuitem">Training</a></li>
                 <li role="none"><a href="#team" role="menuitem">Team</a></li>
                 <li role="none"><a href="#learning" role="menuitem" class="btn-nav">Learning</a></li>
@@ -2624,6 +3009,25 @@
                             <i class="fas fa-check-circle"></i> Saved <strong>BDT 2.8 Lakh</strong> in total project cost
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GALLERY ===== -->
+        <section class="gallery-section" id="gallery" aria-label="Project model gallery">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <div class="tag">Model Gallery</div>
+                    <h2>Project <span>Assets</span></h2>
+                    <p>STAAD models, Tekla 3D views, connection details, layouts, and documents — all in one place.</p>
+                </div>
+
+                <div class="gallery-filters" id="galleryFilters" role="tablist">
+                    <!-- Rendered by JS -->
+                </div>
+
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Rendered by JS -->
                 </div>
             </div>
         </section>
@@ -3026,7 +3430,7 @@
                         </div>
                         <div class="detail">
                             <i class="fas fa-envelope"></i>
-                            <div><a href="mailto:info@unitystructuralsolution.com" style="color:rgba(255,255,255,0.7);">info@unitystructuralsolution.com</a></div>
+                            <div><a href="mailto:unitystructuralsolution@gmail.com" style="color:rgba(255,255,255,0.7);">unitystructuralsolution@gmail.com</a></div>
                         </div>
                         <div class="detail">
                             <i class="fas fa-clock"></i>
@@ -3104,6 +3508,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li><a href="#casestudies">Case Studies</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#training">Training</a></li>
                     </ul>
                 </div>
@@ -3184,6 +3589,8 @@
             // ============================================================
             const CONFIG = {
                 STORAGE_KEY: 'unityBlogV4',
+                GALLERY_MANIFEST: 'pic/gallery/gallery.json',
+                GALLERY_FOLDER: 'pic/gallery/',
                 DEFAULT_POSTS: [{
                     id: Date.now() + 1,
                     title: 'How to Reduce Steel Weight in PEB Design',
@@ -3232,6 +3639,7 @@
             // ============================================================
             const AppState = {
                 posts: [],
+                galleryItems: [],
                 currentCategory: 'all',
                 currentSearch: '',
                 isDark: false,
@@ -3677,7 +4085,272 @@
             };
 
             // ============================================================
-            // 9. CONTACT FORM
+            // 9. GALLERY
+            // ============================================================
+            const Gallery = {
+                items: [],
+                filteredItems: [],
+                currentFilter: 'all',
+                currentIndex: 0,
+                lightbox: null,
+
+                init() {
+                    this.loadManifest();
+                    this.bindFilters();
+                    this.bindLightbox();
+                    return this;
+                },
+
+                loadManifest() {
+                    const grid = document.getElementById('galleryGrid');
+                    const filters = document.getElementById('galleryFilters');
+                    if (!grid) return;
+
+                    grid.innerHTML =
+                        `<div class="gallery-loading"><div class="spinner"></div><p style="margin-top:12px;">Loading gallery assets…</p></div>`;
+
+                    fetch(CONFIG.GALLERY_MANIFEST)
+                        .then(res => {
+                            if (!res.ok) throw new Error('Manifest not found');
+                            return res.json();
+                        })
+                        .then(data => {
+                            if (!Array.isArray(data) || data.length === 0) {
+                                this.renderEmpty(grid, filters);
+                                return;
+                            }
+                            this.items = data;
+                            this.filteredItems = data;
+                            this.render(grid, filters);
+                        })
+                        .catch(err => {
+                            console.warn('Gallery manifest not found. Create pic/gallery/gallery.json', err);
+                            this.renderEmpty(grid, filters);
+                        });
+                },
+
+                render(grid, filters) {
+                    const items = this.filteredItems;
+                    if (!items || items.length === 0) {
+                        this.renderEmpty(grid, filters);
+                        return;
+                    }
+
+                    if (filters) {
+                        const cats = ['all', ...new Set(items.map(i => i.category || 'Uncategorized'))];
+                        const counts = {};
+                        items.forEach(i => {
+                            const cat = i.category || 'Uncategorized';
+                            counts[cat] = (counts[cat] || 0) + 1;
+                        });
+                        counts.all = items.length;
+
+                        filters.innerHTML = cats.map(cat =>
+                            `<button class="${cat === this.currentFilter ? 'active' : ''}" data-filter="${cat}" role="tab" aria-selected="${cat === this.currentFilter ? 'true' : 'false'}">
+                                ${cat === 'all' ? 'All' : cat} <span class="count">${counts[cat] || 0}</span>
+                            </button>`
+                        ).join('');
+                    }
+
+                    grid.innerHTML = items.map((item, index) => {
+                        const isPdf = item.type === 'pdf' || (item.src && item.src.toLowerCase().endsWith('.pdf'));
+                        const src = item.src.startsWith('http') ? item.src : CONFIG.GALLERY_FOLDER + item.src;
+                        const thumbSrc = item.thumb || src;
+
+                        return `
+                            <div class="gallery-item animate-on-scroll" data-index="${index}" data-category="${item.category || 'Uncategorized'}">
+                                <div class="thumb">
+                                    ${isPdf ? `
+                                        <div class="pdf-badge"><i class="fas fa-file-pdf"></i> PDF</div>
+                                        <div style="display:flex;align-items:center;justify-content:center;background:var(--light);width:100%;height:100%;font-size:3rem;color:var(--accent);">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </div>
+                                    ` : `
+                                        <img src="${thumbSrc}" alt="${item.title || 'Gallery image'}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;background:var(--light);width:100%;height:100%;font-size:2rem;color:var(--gray);\\'><i class=\\'fas fa-image\\'></i></div>'">
+                                    `}
+                                    <div class="overlay-icon"><i class="fas ${isPdf ? 'fa-eye' : 'fa-search-plus'}"></i></div>
+                                </div>
+                                <div class="info">
+                                    <span class="cat-tag">${item.category || 'Uncategorized'}</span>
+                                    <h4>${item.title || 'Untitled'}</h4>
+                                    ${item.description ? `<p>${item.description}</p>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                    const newEls = grid.querySelectorAll('.animate-on-scroll');
+                    const obs = new IntersectionObserver((entries) => {
+                        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+                    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+                    newEls.forEach(el => obs.observe(el));
+
+                    grid.querySelectorAll('.gallery-item').forEach(el => {
+                        el.addEventListener('click', function() {
+                            const idx = parseInt(this.dataset.index);
+                            Gallery.openLightbox(idx);
+                        });
+                    });
+                },
+
+                renderEmpty(grid, filters) {
+                    if (filters) {
+                        filters.innerHTML =
+                            `<button class="active" data-filter="all">All <span class="count">0</span></button>`;
+                    }
+                    grid.innerHTML = `
+                        <div class="gallery-empty">
+                            <i class="fas fa-images"></i>
+                            <h3>No gallery assets found</h3>
+                            <p>Place your images and PDFs in <strong>pic/gallery/</strong> and create a <strong>gallery.json</strong> manifest.</p>
+                            <div class="code-block">
+                                ${JSON.stringify([
+                                    { "src": "staad-model.jpg", "title": "STAAD Model", "category": "Model", "description": "Structural analysis model" },
+                                    { "src": "tekla-3d-model.jpg", "title": "Tekla 3D Model", "category": "Model", "description": "3D steel model" },
+                                    { "src": "boq.pdf", "title": "Bill of Quantities", "category": "Document", "type": "pdf" }
+                                ], null, 2)}
+                            </div>
+                            <p style="margin-top:12px;font-size:0.8rem;">📁 Save this as <strong>pic/gallery/gallery.json</strong></p>
+                        </div>
+                    `;
+                },
+
+                bindFilters() {
+                    const filters = document.getElementById('galleryFilters');
+                    if (!filters) return;
+                    filters.addEventListener('click', (e) => {
+                        const btn = e.target.closest('button');
+                        if (!btn || !btn.dataset.filter) return;
+                        filters.querySelectorAll('button').forEach(b => {
+                            b.classList.remove('active');
+                            b.setAttribute('aria-selected', 'false');
+                        });
+                        btn.classList.add('active');
+                        btn.setAttribute('aria-selected', 'true');
+                        this.currentFilter = btn.dataset.filter;
+                        this.applyFilter();
+                    });
+                },
+
+                applyFilter() {
+                    const grid = document.getElementById('galleryGrid');
+                    const filters = document.getElementById('galleryFilters');
+                    if (!grid) return;
+
+                    if (this.currentFilter === 'all') {
+                        this.filteredItems = [...this.items];
+                    } else {
+                        this.filteredItems = this.items.filter(i =>
+                            (i.category || 'Uncategorized') === this.currentFilter
+                        );
+                    }
+                    this.render(grid, filters);
+                },
+
+                bindLightbox() {
+                    document.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && this.lightbox && this.lightbox.classList.contains('active')) {
+                            this.closeLightbox();
+                        }
+                        if (e.key === 'ArrowLeft' && this.lightbox && this.lightbox.classList.contains('active')) {
+                            this.navigate(-1);
+                        }
+                        if (e.key === 'ArrowRight' && this.lightbox && this.lightbox.classList.contains('active')) {
+                            this.navigate(1);
+                        }
+                    });
+                },
+
+                openLightbox(index) {
+                    const items = this.filteredItems;
+                    if (!items || items.length === 0 || index < 0 || index >= items.length) return;
+                    this.currentIndex = index;
+
+                    if (!this.lightbox) {
+                        this.lightbox = document.createElement('div');
+                        this.lightbox.className = 'gallery-lightbox';
+                        this.lightbox.innerHTML = `
+                            <div class="lb-content">
+                                <button class="lb-close" aria-label="Close lightbox">×</button>
+                                <button class="lb-nav prev" aria-label="Previous">‹</button>
+                                <button class="lb-nav next" aria-label="Next">›</button>
+                                <div class="lb-body"></div>
+                                <div class="lb-counter"></div>
+                            </div>
+                        `;
+                        document.body.appendChild(this.lightbox);
+
+                        this.lightbox.querySelector('.lb-close').addEventListener('click', () => this.closeLightbox());
+                        this.lightbox.querySelector('.lb-nav.prev').addEventListener('click', () => this.navigate(-
+                        1));
+                        this.lightbox.querySelector('.lb-nav.next').addEventListener('click', () => this.navigate(1));
+                        this.lightbox.addEventListener('click', (e) => {
+                            if (e.target === this.lightbox) this.closeLightbox();
+                        });
+                    }
+
+                    this.lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    this.renderLightbox(index);
+                },
+
+                renderLightbox(index) {
+                    const items = this.filteredItems;
+                    if (!items || items.length === 0) return;
+                    const item = items[index];
+                    if (!item) return;
+
+                    const body = this.lightbox.querySelector('.lb-body');
+                    const counter = this.lightbox.querySelector('.lb-counter');
+                    const isPdf = item.type === 'pdf' || (item.src && item.src.toLowerCase().endsWith('.pdf'));
+                    const src = item.src.startsWith('http') ? item.src : CONFIG.GALLERY_FOLDER + item.src;
+
+                    if (isPdf) {
+                        body.innerHTML = `
+                            <div class="lb-pdf">
+                                <i class="fas fa-file-pdf"></i>
+                                <h3>${item.title || 'PDF Document'}</h3>
+                                <p>${item.description || ''}</p>
+                                <a href="${src}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                    <i class="fas fa-download"></i> Open PDF
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        body.innerHTML =
+                            `<img src="${src}" alt="${item.title || 'Gallery image'}" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\\'padding:40px;text-align:center;color:var(--gray);\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;display:block;margin-bottom:10px;\\'></i><p>Image not found</p></div>'">`;
+                    }
+
+                    if (counter) {
+                        counter.textContent = `${index + 1} / ${items.length}`;
+                    }
+
+                    const prev = this.lightbox.querySelector('.lb-nav.prev');
+                    const next = this.lightbox.querySelector('.lb-nav.next');
+                    if (prev) prev.style.display = index === 0 ? 'none' : 'flex';
+                    if (next) next.style.display = index === items.length - 1 ? 'none' : 'flex';
+                },
+
+                navigate(delta) {
+                    const items = this.filteredItems;
+                    if (!items || items.length === 0) return;
+                    let newIndex = this.currentIndex + delta;
+                    if (newIndex < 0) newIndex = items.length - 1;
+                    if (newIndex >= items.length) newIndex = 0;
+                    this.currentIndex = newIndex;
+                    this.renderLightbox(newIndex);
+                },
+
+                closeLightbox() {
+                    if (this.lightbox) {
+                        this.lightbox.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            };
+
+            // ============================================================
+            // 10. CONTACT FORM
             // ============================================================
             const ContactForm = {
                 init() {
@@ -3708,7 +4381,7 @@
             };
 
             // ============================================================
-            // 10. THEME
+            // 11. THEME
             // ============================================================
             const Theme = {
                 init() {
@@ -3721,7 +4394,7 @@
             };
 
             // ============================================================
-            // 11. STICKY CTA
+            // 12. STICKY CTA
             // ============================================================
             const StickyCTA = {
                 init() {
@@ -3736,7 +4409,7 @@
             };
 
             // ============================================================
-            // 12. DOWNLOAD BUTTONS
+            // 13. DOWNLOAD BUTTONS
             // ============================================================
             const Downloads = {
                 init() {
@@ -3750,8 +4423,6 @@
                                 'design-checklist': 'Design_Checklist.pdf'
                             };
                             Toast.success(`Preparing download: ${names[file] || file}`);
-                            // In production, this would trigger an actual download
-                            // For now, show a message
                             const input = document.createElement('input');
                             input.type = 'email';
                             input.placeholder = 'Enter your email to download';
@@ -3788,7 +4459,7 @@
             };
 
             // ============================================================
-            // 13. APP INIT
+            // 14. APP INIT
             // ============================================================
             const App = {
                 init() {
@@ -3799,6 +4470,7 @@
                     Counters.init();
                     FAQ.init();
                     Blog.init();
+                    Gallery.init();
                     ContactForm.init();
                     Theme.init();
                     StickyCTA.init();
@@ -3806,12 +4478,13 @@
 
                     console.log('🏗️ Unity Structural Solution v4.0 loaded');
                     console.log(`📚 ${AppState.posts.length} blog posts loaded`);
+                    console.log(`🖼️ Gallery: ${Gallery.items.length} items loaded from manifest`);
                     return this;
                 }
             };
 
             // ============================================================
-            // 14. START
+            // 15. START
             // ============================================================
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', () => App.init());
@@ -3819,7 +4492,7 @@
                 App.init();
             }
 
-            window.__app = { App, AppState, Toast };
+            window.__app = { App, AppState, Toast, Gallery };
 
         })();
     </script>

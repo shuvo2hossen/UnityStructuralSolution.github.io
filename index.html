@@ -1452,6 +1452,11 @@
             color: #fff;
             transition: var(--transition);
             outline: none;
+            /* === FIX: ensure mobile keyboard appears === */
+            -webkit-user-select: text;
+            user-select: text;
+            touch-action: manipulation;
+            pointer-events: auto;
         }
         .contact-form input::placeholder,
         .contact-form select,
@@ -2291,12 +2296,6 @@
                             ⚠️ Something went wrong. Please try again.
                         </div>
 
-                        <!--
-                        FORMSPREE INTEGRATION
-                        form ID: mdaqball
-                        The library is loaded from: https://formspree.io/js/formspree.js
-                        Fields are mapped via data-fs-field attributes.
-                        -->
                         <form id="contactForm" data-formspree="mdaqball">
 
                             <!-- Personal Info -->
